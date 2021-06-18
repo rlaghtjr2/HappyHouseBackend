@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.edu.vue.dao.HrmMapper">
+	<select id="findAptByDong"
+		resultType="com.ssafy.edu.vue.dto.AptDto">
+		select idx,code,dongcode,city,gugun,dong,AptName,dealAmount,jibun,lat,lng
+		from house_info
+		where city=#{city} AND gugun=#{gugun} AND dong=#{dong}
+	</select>
+
+	<select id="findAptByAptName"
+		resultType="com.ssafy.edu.vue.dto.AptDto">
+		select idx,code,dongcode,city,gugun,dong,AptName,dealAmount,jibun,lat,lng
+		from house_info
+		where city=#{city} AND gugun=#{gugun} AND AptNAme like
+		concat('%',#{aptName},'%')
+	</select>
+	
+	<select id="findInterestAptById" parameterType="java.lang.String"
+		resultType="com.ssafy.edu.vue.dto.AptDto">
+		SELECT idx,code,dongcode,city,gugun,dong,AptName,dealAmount,jibun,lat,lng 
+		FROM house_info 
+		WHERE code IN (SELECT code FROM interest_area WHERE id=#{id})
+	</select>
+</mapper>

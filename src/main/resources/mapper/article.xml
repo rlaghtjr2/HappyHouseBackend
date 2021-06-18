@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.edu.vue.dao.HrmMapper">
+
+	<insert id="addArticle"
+		parameterType="com.ssafy.edu.vue.dto.ArticleDto">
+		INSERT INTO article
+		( title, writer, content, likes,
+		views)
+		VALUES(
+		#{title},#{writer},#{content}, #{likes}, #{views}
+		)
+	</insert>
+
+	<delete id="deleteArticle" parameterType="java.lang.Integer">
+		DELETE FROM article
+		WHERE idx=#{idx}
+	</delete>
+
+	<update id="updateArticle"
+		parameterType="com.ssafy.edu.vue.dto.ArticleDto">
+		UPDATE article SET
+		title=#{title}, writer=#{writer} ,
+		content= #{content},
+		likes=#{likes}, views=#{views}
+		WHERE idx=#{idx}
+	</update>
+
+	<select id="findArticleByIdx" parameterType="java.lang.Integer"
+		resultType="com.ssafy.edu.vue.dto.ArticleDto">
+		update article set views=views+1 where idx=#{idx};
+		
+		select idx,title,writer,content,likes,views,created_date
+		from article
+		where idx= #{idx}
+		
+	</select>
+
+	<select id="findArticleByTitle" parameterType="java.lang.String"
+		resultType="com.ssafy.edu.vue.dto.ArticleDto">
+		select idx,title,writer,content,likes,views,created_date
+		from article
+		where title like concat('%',#{title},'%')
+	</select>
+
+	<select id="findArticleByWriter"
+		parameterType="java.lang.String"
+		resultType="com.ssafy.edu.vue.dto.ArticleDto">
+		select idx,title,writer,content,likes,views,created_date
+		from article
+		where writer = #{writer}
+	</select>
+	
+	<select id="findArticleByPage"
+		parameterType="java.lang.Integer"
+		resultType="com.ssafy.edu.vue.dto.ArticleDto">
+		select idx,title,writer,content,likes,views,created_date
+		from article
+		LIMIT #{page},10
+	</select>
+	
+	<select id="findArticle"
+		resultType="com.ssafy.edu.vue.dto.ArticleDto">
+		select idx,title,writer,content,likes,views,created_date
+		from article
+	</select>
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.edu.vue.dao.HrmMapper">
+
+   <select id="findUserById" parameterType="java.lang.String"
+      resultType="com.ssafy.edu.vue.dto.UserDto">
+      select id,password,name,email,birthday,sex,created_date
+      from user
+      where user.id= #{id}
+   </select>
+
+   <insert id="addUser"
+      parameterType="com.ssafy.edu.vue.dto.UserDto">
+      INSERT INTO user
+      ( id, password, name, email, birthday, sex)
+      VALUES(
+      #{id},#{password},#{name},#{email}, #{birthday}, #{sex}
+      )
+   </insert>
+
+   <delete id="deleteUser" parameterType="java.lang.String">
+      DELETE FROM user WHERE
+      id=#{id}
+   </delete>
+
+   <update id="updateUser"
+      parameterType="com.ssafy.edu.vue.dto.UserDto">
+      UPDATE user SET
+      password=#{password} , name=
+      #{name}, email = #{email},
+      birthday=#{birthday}, sex=#{sex}
+      WHERE id=#{id}
+   </update>
+   <select id="findAllUser"
+      resultType="com.ssafy.edu.vue.dto.UserDto">
+      select id,password,name,email,birthday,sex,created_date
+      from user
+   </select>
+   
+   <select id="findUser" parameterType="com.ssafy.edu.vue.dto.UserDto"
+      resultType="com.ssafy.edu.vue.dto.UserDto">
+      select id,password,name,email,birthday,sex,created_date
+      from user
+      where user.id= #{id} AND user.password = #{password}
+   </select>
+   
+   <select id="findUserByIdEmail" parameterType="com.ssafy.edu.vue.dto.UserDto"
+      resultType="com.ssafy.edu.vue.dto.UserDto">
+      select id,password,name,email,birthday,sex,created_date
+      from user
+      where user.id= #{id} AND user.email = #{email}
+   </select>
+   
+   <update id="updatePassword"
+      parameterType="com.ssafy.edu.vue.dto.FindPWDto">
+      UPDATE user SET
+      password=#{randPwd}
+      WHERE id=#{id}
+   </update>
+</mapper>
