@@ -61,7 +61,7 @@ public class UserController {
 
 	@ApiOperation(value = " 해당유저의 정보를 삭제한다.", response = BoolResult.class)
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<BoolResult> deleteEmployee(@PathVariable String id) throws Exception {
+	public ResponseEntity<BoolResult> deleteUser(@PathVariable String id) throws Exception {
 
 		boolean total = userService.deleteUser(id);
 		BoolResult nr = new BoolResult();
@@ -76,7 +76,7 @@ public class UserController {
 
 	@ApiOperation(value = " 유저의 정보를 수정한다 ", response = BoolResult.class)
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public ResponseEntity<BoolResult> updateArticle(@RequestBody UserDto dto) throws Exception {
+	public ResponseEntity<BoolResult> updateUser(@RequestBody UserDto dto) throws Exception {
 		boolean total = userService.updateUser(dto);
 		BoolResult nr = new BoolResult();
 		nr.setCount(total);
@@ -90,7 +90,7 @@ public class UserController {
 
 	@ApiOperation(value = "유저아이디로 유저의 정보를 찾는다.", response = UserDto.class)
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<UserDto> findEmployeeById(@PathVariable String id) throws Exception {
+	public ResponseEntity<UserDto> findUserById(@PathVariable String id) throws Exception {
 		UserDto user = userService.findUserById(id);
 		if (user == null || user.getId() == "") {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -100,7 +100,7 @@ public class UserController {
 	
 	@ApiOperation(value = "모든 유저정보를 찾는다.", response = UserDto.class)
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public ResponseEntity< List<UserDto> > findDongByCityGugun() throws Exception {
+	public ResponseEntity< List<UserDto> > findAllUser() throws Exception {
 		
 		List<UserDto> users = userService.findAllUser();
 		if (users.isEmpty()) {

@@ -37,7 +37,7 @@ public class ArticleController {
 
 	@ApiOperation(value = " 새로운 게시글 정보를 입력한다. 그리고 그 게시글의 테이블상 인덱스를 반환한다.", response = NumberResult.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ResponseEntity<NumberResult> addUser(@RequestBody ArticleDto dto) throws Exception {
+	public ResponseEntity<NumberResult> addArticle(@RequestBody ArticleDto dto) throws Exception {
 		int total = articleService.addArticle(dto);
 		NumberResult nr = new NumberResult();
 		nr.setCount(total);
@@ -55,7 +55,7 @@ public class ArticleController {
 
 	@ApiOperation(value = " 해당게시글을 삭제한다.", response = BoolResult.class)
 	@RequestMapping(value = "/{idx}", method = RequestMethod.DELETE)
-	public ResponseEntity<BoolResult> deleteEmployee(@PathVariable int idx) throws Exception {
+	public ResponseEntity<BoolResult> deleteArticle(@PathVariable int idx) throws Exception {
 
 		boolean total = articleService.deleteArticle(idx);
 		BoolResult nr = new BoolResult();
@@ -104,7 +104,7 @@ public class ArticleController {
 
 	@ApiOperation(value = "게시글의 인덱스로 게시글의 정보를 찾는다.", response = ArticleDto.class)
 	@RequestMapping(value = "/idx/{idx}", method = RequestMethod.GET)
-	public ResponseEntity<ArticleDto> findEmployeeById(@PathVariable int idx) throws Exception {
+	public ResponseEntity<ArticleDto> findArticleByIdx(@PathVariable int idx) throws Exception {
 		ArticleDto article = articleService.findArticleByIdx(idx);
 		if (article == null || article.getIdx() == 0) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -124,7 +124,7 @@ public class ArticleController {
 	
 	@ApiOperation(value = "전체 게시글을 반납한다.", response = ArticleDto.class)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ResponseEntity<List<ArticleDto>> findArticle() throws Exception {
+	public ResponseEntity<List<ArticleDto>> findAllArticle() throws Exception {
 		List<ArticleDto> articles = articleService.findArticle();
 		if (articles.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);

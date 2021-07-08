@@ -36,7 +36,7 @@ public class InterestController {
 
 	@ApiOperation(value = " 새로운 관심지역 정보를 입력한다. 그리고 그 입력한 정보의 테이블상 인덱스를 반환한다.", response = NumberResult.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ResponseEntity<NumberResult> addUser(@RequestBody InterestDto dto) throws Exception {
+	public ResponseEntity<NumberResult> addInterest(@RequestBody InterestDto dto) throws Exception {
 
 		int total = interestService.addInterest(dto);
 		NumberResult nr = new NumberResult();
